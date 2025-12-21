@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+     
+
+    </head>
+    <body>
+        <h2>The list of users are</h2>
+
+            <% for(datas of data){ %>
+            <div><h3 class="post"><%= datas.id %></h3>
+                <h3 class="user">@<%= datas.name %></h3>
+                <h3><%= datas.email %></h3>
+
+                <a href="/user/<%= datas.id %>/edit">Edit</a>
+               
+            </div>    
+            <hr>
+        <%} %>
+
+
+
+
+
+    </body>
+</html>
