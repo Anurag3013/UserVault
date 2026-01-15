@@ -14,6 +14,9 @@
                 <h3><%= datas.email %></h3>
 
                 <a href="/user/<%= datas.id %>/edit">Edit</a>
+                 <form method = "post" action="/user/<%=datas.id %>?_method=DELETE">
+                    <button>Delete</button>
+                </form>
                
             </div>    
             <hr>

@@ -9,6 +9,7 @@ app.set("views", path.join(__dirname, "/views"));
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.urlencoded({ extended: true }));
 const methodOverride = require("method-override");
+const {v4: uuidv4} = require('uuid');
 
 app.use(methodOverride("_method"));
 
@@ -115,6 +116,7 @@ app.get("/", (req, res) => {
   }
 });
 
+
 // Show route to show user 
 
 app.get("/user" , (req , res)=>{
@@ -136,7 +138,35 @@ app.get("/user" , (req , res)=>{
   //res.send("server is listening to user");
 
 });
+
+app.get("/user/new", (req , res)=>{
+  res.render("new.ejs");
+
+});
+
+app.post("/user" , (req, res)=>{
+  //res.send("it is working");
+  let {name , email, password} = req.body;
+  let id = uuidv4();
+    let q = "INSERT INTO user (id, name, email, password) VALUES (?, ?, ?, ?)";
+    try {
+      connection.query(q, [id, name, email, password] ,(err, result)=>{
+          if (err) throw err;
+          console.log("Success");
+          res.redirect("/user");
+
+          
+            
+      });
+
+  } catch(err){
+      console.log(err);
+       res.send("Some error in DB");
+  }
+
   
+
+});
 
 // edit route 
 
@@ -198,3 +228,30 @@ app.patch("/user/:id", (req, res)=>{
 
     
 });
+
+app.get("/user/back" , (req ,res)=>{
+  res.redirect("/user");
+
+});
+
+app.delete("/user/:id", (req,res)=>{
+  let {id}= req.params;
+  let q = `DELETE  FROM user  WHERE id ='${id}'`;
+     try {
+      connection.query(q, (err, result)=>{
+          if (err) throw err;
+         // console.log("Success");
+           
+          res.redirect("/user");
+          
+            
+      });
+
+  } catch(err){
+      console.log(err);
+       res.send("Some error in DB");
+  }
+  
+});
+  
+
