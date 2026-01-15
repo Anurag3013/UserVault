@@ -91,6 +91,7 @@ GET    /               Home page (user count)
 GET    /user           View all users  
 GET    /user/:id/edit  Edit user  
 PATCH  /user/:id       Update user  
+DELETE /user/:id       Delete user
 
 ---
 
@@ -112,7 +113,7 @@ Engineering Student | Aspiring Full-Stack Developer
 
 ## 🌱 Future Enhancements
 
-Delete user functionality  
+
 Authentication system  
 Password hashing  
 Pagination  
